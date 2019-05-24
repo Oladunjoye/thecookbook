@@ -4,10 +4,13 @@ import { Link } from "react-router-dom";
 
 function RecipeItem(props) {
   const { recipes, error } = props;
-  console.log(recipes);
-
-  const displayRecipe = recipes.map(recipe => {
-    console.log(recipe.title);
+  let displayRecipe;
+if(!recipes){
+  displayRecipe =  <div> No recipe found</div>
+}
+ else{ 
+   displayRecipe = recipes.map(recipe => {
+ 
     return (
       <div
         key={recipe.recipe_id}
@@ -43,11 +46,14 @@ function RecipeItem(props) {
         </div>
       </div>
     );
+    
   });
+  console.log(displayRecipe)
+}
   return (
     <div className="container">
       <div className="row">
-        {displayRecipe}
+        {displayRecipe.length > 1 ? displayRecipe : <div>  Search not found, Try another recipe</div>  }
         {/* {error ? (
           <h1 className="text-danger order-md-4">{error}</h1>
         ) : (
