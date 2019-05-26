@@ -3,7 +3,7 @@ import { Link } from "react-router-dom";
 // import registerServiceWorker from "./registerServceWorker";
 
 function RecipeItem(props) {
-  const { recipes, error } = props;
+  const { recipes,  isLoading } = props;
   let displayRecipe;
 if(!recipes){
   displayRecipe =  <div> No recipe found</div>
@@ -48,17 +48,22 @@ if(!recipes){
     );
     
   });
-  console.log(displayRecipe)
+
+  if(!isLoading){
+    displayRecipe =  displayRecipe.length > 1 ? displayRecipe : <div>  Search not found, Try another recipe</div> 
+  }
+  else{
+   
+    displayRecipe  = <p>Loading ...</p>
+  }
+
 }
   return (
+
     <div className="container">
       <div className="row">
-        {displayRecipe.length > 1 ? displayRecipe : <div>  Search not found, Try another recipe</div>  }
-        {/* {error ? (
-          <h1 className="text-danger order-md-4">{error}</h1>
-        ) : (
-          displayRecipe
-        )} */}
+        { displayRecipe}
+       
       </div>
     </div>
   );
